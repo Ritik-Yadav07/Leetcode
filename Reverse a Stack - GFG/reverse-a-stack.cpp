@@ -10,19 +10,31 @@ using namespace std;
 
 class Solution{
 public:
-    void Reverse(stack<int> &St){
+    
+    void insertAtBottom(stack<int>&St,int num)
+    {
+        if(St.size()==0)
+        {
+            St.push(num);
+            return;
+        }
         
-       // Approach 1  --> Using Extra Space
-       stack<int>newStack;
-       while(St.empty()==false)
-       {
-           int data = St.top();
-           St.pop();
-           newStack.push(data);
-           
-       }
-       
-       St = newStack;
+        else{
+            int temp = St.top();
+            St.pop();
+            insertAtBottom(St,num);
+            St.push(temp);
+        }
+    }
+    
+    void Reverse(stack<int> &St){
+        // algo : put aside top element,recursive call reverse stack then inertAtBottom for top
+        if(St.empty()) return;
+        int num = St.top();
+        St.pop();
+        
+        Reverse(St);
+        insertAtBottom(St,num);
     }
 };
 
