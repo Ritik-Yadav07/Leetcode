@@ -1,40 +1,52 @@
 //{ Driver Code Starts
-#include<bits/stdc++.h>
+// Initial Template for C++
+
+#include <bits/stdc++.h>
 using namespace std;
 
-
 // } Driver Code Ends
+// User function Template for C++
 
-class Solution {
-  public:
-    long long countBits(long long N) {
+class Solution{
+public:
+    
+    int largestPowerofTwo(int n)
+{
+    int x = 0;
+    while((1<<x)<=n)
+    {
+        x++;
+    }
+    return x-1;
+}
+    
+    int countBits(int N){
         // code here
-        long long count = 0;
-         for(int i=1;i<=N;++i)
-         {
-             count+=(__builtin_popcount(i));
-         }
-         return count;
+    //   See pepcoding channel for bits
+       if(N==0) return 0;
+       
+       int x = largestPowerofTwo(N);
+       int btill2x = x * (1<<(x-1));
+       int msb2xton = N - (1<<x) + 1;
+       int rest = N-(1<<x);
+       
+       return btill2x + msb2xton + countBits(rest);
+      
     }
 };
-
 
 //{ Driver Code Starts.
 
 int main(){
     int t;
-    scanf("%d ",&t);
+    cin>>t;
     while(t--){
+        int N;
+        cin>>N;
         
-        long long N;
-        scanf("%lld",&N);
-        
-        Solution obj;
-        long long res = obj.countBits(N);
-        
-        cout<<res<<endl;
-        
+        Solution ob;
+        cout<<ob.countBits(N)<<"\n";
     }
+    return 0;
 }
-
 // } Driver Code Ends
