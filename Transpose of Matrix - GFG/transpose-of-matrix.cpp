@@ -10,13 +10,17 @@ class Solution
     void transpose(vector<vector<int> >& matrix, int n)
     { 
         // code here 
-        for(int row = 0;row<n;row++)
+        int row = n;
+        int col = n;
+        
+        for(int i=0;i<row;i++)
         {
-            for(int col = row+1;col<n;col++)
+            for(int j=i+1;j<col;j++)
             {
-                swap(matrix[row][col],matrix[col][row]);
+                swap(matrix[i][j],matrix[j][i]);
             }
         }
+        
         return;
     }
 };
@@ -31,11 +35,10 @@ int main() {
     {
         int n;
         cin>>n;
-        vector<vector<int> > matrix(n); 
+        vector<vector<int> > matrix(n,vector<int>(n)); 
 
         for(int i=0; i<n; i++)
         {
-            matrix[i].assign(n, 0);
             for( int j=0; j<n; j++)
             {
                 cin>>matrix[i][j];
@@ -45,9 +48,11 @@ int main() {
         Solution ob;
         ob.transpose(matrix,n);
         for (int i = 0; i < n; ++i)
+        {
             for (int j = 0; j < n; ++j)
                 cout<<matrix[i][j]<<" ";
-        cout<<endl;
+            cout<<endl;
+        }
     }
     return 0;
 }
