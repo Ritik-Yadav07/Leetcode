@@ -10,35 +10,35 @@ class Solution{
 public:
 	int search(string pat, string txt) {
 	    // code here
+	    int n = txt.size();
+	    int k = pat.size();
 	    
-	    int count=0;
-	    vector<int>Hash(26,0); //for string pat
-	    vector<int>tempHash(26,0); //for string text while scanning
-
-	    for(int i=0;i<pat.size();i++)
-	    {
-	        Hash[pat[i]-'a']++;
+	    vector<int>hash1(26,0);
+	    vector<int>hash2(26,0);
+	    
+	    for(auto ch : pat){
+	        hash1[ch-'a']++;
 	    }
 	    
-	    	    
+	    int tail = 0;
 	    int head = 0;
-	    int tail=0;
 	    
-	    for(head=0;head<txt.size();head++)
+	    int count=0;
+	    
+	    for(head=0;head<n;head++)
 	    {
-	        tempHash[txt[head]-'a']++;
+	        hash2[txt[head]-'a']++;
 	        
-	        while((head-tail+1)>pat.size())
-	        {
-	            tempHash[txt[tail]-'a']--;
+	        if((head-tail+1)==k){
+	            if(hash1==hash2){
+	                count++;
+	            }
+	            hash2[txt[tail]-'a']--;
 	            tail++;
 	        }
-	        
-	        if(tempHash==Hash) count++;
 	    }
 	    
 	    return count;
-	    
 	}
 
 };
